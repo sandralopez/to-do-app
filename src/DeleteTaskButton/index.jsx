@@ -1,6 +1,6 @@
-function DeleteTaskButton() {
+function DeleteTaskButton({ onDelete }) {
 	return (
-		<div>X</div>
+		<div onClick={ onDelete }>X</div>
 	)
 }
 

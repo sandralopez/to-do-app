@@ -80,35 +80,32 @@ const tasks = [
 
 	/* const createTask = (task) => {
 
-	}
+	} */
 
-	const completeTask = (taskId) => {
-    const task = tasks.find(id => id==taskId);
-    task.isDone = true;
-    setIsTaskDone(true);
-    // saveTask(task);
-    console.log('completeTask');
+	const completeTask = (id) => {
+    console.log('completeTask id: ', id);
 	}
 
 	const deleteTask = (id) => {
-    console.log('deleteTask');
+    console.log('deleteTask id:', id);
 	}
 
+  /*
 	const updateTask = (task) => {
     console.log('updateTask');
 	}
 
 	const createTaskList = (taskList) => {
     console.log('createTaskList');
-	}
+	} */
 
-	const deleteTaskList = (id) => {
-    console.log('deleteTaskList');
-	}
-
-	const updateTaskList = (taskList) => {
+	/* const updateTaskList = (taskList) => {
     console.log('updateTaskList');
 	} */
+
+  const deleteTaskList = (id) => {
+    console.log('deleteTaskList id: ', id);
+  }
 
 	const showTaskList = (taskListId) => {
     const t = tasks.find((list) => list.id==taskListId);
@@ -117,8 +114,7 @@ const tasks = [
 
     if (t.tasks.length > 0) {
       setHasTasks(true);
-    }
-    else {
+    } else {
       setHasTasks(false);
     }
 	}
@@ -127,13 +123,9 @@ const tasks = [
 		<TaskContext.Provider 
 			value={{
 				tasks,
-				/*createTask,
-				completeTask,
-				deleteTask,
-				updateTask,
-				createTaskList,
-				deleteTaskList,
-				updateTaskList,*/
+        completeTask,
+        deleteTask,
+        deleteTaskList,
 				showTaskList,
         task,
         setTask,
@@ -143,6 +135,10 @@ const tasks = [
         setIsTaskDone,
         hasTasks,
         setHasTasks,
+        /*createTask,
+        updateTask,
+        createTaskList,
+        updateTaskList,*/
 			}}>
 			{children}
 		</TaskContext.Provider>

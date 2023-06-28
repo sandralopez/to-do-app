@@ -1,13 +1,16 @@
 import { TaskContext, TaskProvider } from '../TaskContext';
 import { TaskLists } from '../TaskLists';
 import { TaskList } from '../TaskList';
+import { Container } from '../Container';
 
 function App() {
   return (
     <>
       <TaskProvider>
-        <TaskLists />
-        <TaskList />
+        <Container>
+          <TaskLists />
+          <TaskList  />
+        </Container>
       </TaskProvider>
     </>
   )

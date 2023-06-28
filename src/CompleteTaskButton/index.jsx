@@ -1,6 +1,6 @@
-function CompleteTaskButton() {
+function CompleteTaskButton({ onComplete }) {
 	return (
-		<div>V</div>
+		<div onClick={ onComplete }>V</div>
 	)
 }
 

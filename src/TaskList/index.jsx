@@ -3,17 +3,29 @@ import { TaskContext } from '../TaskContext'
 import { Task } from '../Task';
 
 function TaskList() {
-	const context = useContext(TaskContext);
+	const {
+		taskList,
+		hasTasks,
+		completeTask,
+		deleteTask,
+	} = useContext(TaskContext);
 
-	if (context.hasTasks) {
+	if (hasTasks) {
 		return (
-			<ul>
-				{
-					context.taskList.tasks.map((task) => 
-						<Task key={task.id} description={task.description}></Task>
-					)
-				}
-			</ul>
+			<div>
+				<ul>
+					{
+						taskList.tasks.map((task) => 
+							<Task 
+								key={task.id} 
+								id={task.id}
+								description={task.description} 
+								onComplete={ () => completeTask(task.id) } 
+								onDelete={ () => deleteTask(task.id) } />
+						)
+					}
+				</ul>
+			</div>
 		)
 	}
 }
