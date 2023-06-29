@@ -8,6 +8,7 @@ const tasks = [
     {
       "id" : 1,
       "name": "A task list",
+      "description": "Tasks from university",
       "limit_date": "09/07/2023",
       "tasks": [
         {
@@ -30,6 +31,7 @@ const tasks = [
     {
       "id" : 2,
       "name": "Another list",
+      "description": "Tasks from work",
       "limit_date": "01/07/2023",
       "tasks": [
         {
@@ -52,6 +54,7 @@ const tasks = [
     {
       "id" : 3,
       "name": "Other list",
+      "description": "Tasks from painting classes",
       "limit_date": "01/07/2023",
       "tasks": [
         {

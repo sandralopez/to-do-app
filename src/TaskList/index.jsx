@@ -12,7 +12,10 @@ function TaskList() {
 
 	if (hasTasks) {
 		return (
-			<div>
+			<div className="flex flex-col mr-8 p-8 drop-shadow-xl z-10 backdrop w-full h-full bg-white bg-opacity-25 rounded-2xl p-3 text-gray-800 shadow-xl">
+				<span className="text-lg font-semibold text-center mb-2">Tasks</span>
+				<span className="text-lg font-medium">Deadline: {taskList.limit_date}</span>
+				<span className="text-lg font-light mb-4">Description: {taskList.description}</span>
 				<ul>
 					{
 						taskList.tasks.map((task) => 
