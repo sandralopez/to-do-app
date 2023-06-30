@@ -1,10 +1,11 @@
 import { createContext, useState } from 'react';
+import { useLocalStorage } from'../App/useLocalStorage';
 
 const TaskContext = createContext();
 
 function TaskProvider({ children }) {
 
-const tasks = [
+/*const tasks = [
     {
       "id" : 1,
       "name": "A task list",
@@ -74,26 +75,66 @@ const tasks = [
         },
       ]
     }
-  ];
+  ]; */
 
-	const [task, setTask] = useState({});
+  const [data, saveData] = useLocalStorage('TASKS', []);
+
   const [taskList, setTaskList] = useState({});
-  const [isTaskDone, setIsTaskDone] = useState(false);
-  const [hasTasks,setHasTasks] = useState(false);
 
-	/* const createTask = (task) => {
+  const showTaskList = (taskListId) => {
+    const list = data?.find((item) => item.id==taskListId);
 
-	} */
+    setTaskList(list);
+  }
+
+  const deleteTaskList = (id) => {
+    const newData = [...data];
+    const taskListIndex = data?.findIndex(
+      (taskList) => id === id
+    );
+
+    newData.splice(taskListIndex, 1);
+    saveData(newData);
+  }
 
 	const completeTask = (id) => {
-    console.log('completeTask id: ', id);
+    const newTaskList = {...taskList};
+    const taskIndex = taskList.tasks?.findIndex(
+      (task) => task.id === id
+    );
+
+    newTaskList.tasks[taskIndex].isDone = true;
+    setTaskList(newTaskList);
+    saveTaskList(newTaskList);
 	}
 
 	const deleteTask = (id) => {
-    console.log('deleteTask id:', id);
+    const newTaskList = {...taskList};
+    const taskIndex = taskList.tasks?.findIndex(
+      (task) => task.id === id
+    );
+
+    newTaskList.tasks?.splice(taskIndex, 1);
+    setTaskList(newTaskList);
+    saveTaskList(newTaskList);
 	}
 
+  const saveTaskList = (taskList) => {
+    const newData = [...data];
+    const taskListIndex = data.findIndex(
+      (list) => list.id === taskList.id
+    )
+
+    newData[taskListIndex] = taskList;
+
+    saveData(newData);
+  }
+
   /*
+  const createTask = (task) => {
+    console.log('createTask');
+  } 
+
 	const updateTask = (task) => {
     console.log('updateTask');
 	}
@@ -106,42 +147,17 @@ const tasks = [
     console.log('updateTaskList');
 	} */
 
-  const deleteTaskList = (id) => {
-    console.log('deleteTaskList id: ', id);
-  }
-
-	const showTaskList = (taskListId) => {
-    const t = tasks.find((list) => list.id==taskListId);
-
-    setTaskList(t);
-
-    if (t.tasks.length > 0) {
-      setHasTasks(true);
-    } else {
-      setHasTasks(false);
-    }
-	}
-
 	return (
 		<TaskContext.Provider 
 			value={{
-				tasks,
+        data,
+        saveData,
         completeTask,
         deleteTask,
         deleteTaskList,
 				showTaskList,
-        task,
-        setTask,
         taskList,
         setTaskList,
-        isTaskDone,
-        setIsTaskDone,
-        hasTasks,
-        setHasTasks,
-        /*createTask,
-        updateTask,
-        createTaskList,
-        updateTaskList,*/
 			}}>
 			{children}
 		</TaskContext.Provider>
