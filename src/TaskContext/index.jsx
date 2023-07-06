@@ -81,6 +81,19 @@ function TaskProvider({ children }) {
 
   const [taskList, setTaskList] = useState({});
 
+  const createTaskList = (formData) => {
+    if (data.length == 0)
+      formData.id = 1;
+    else {
+      const maxId = data.reduce((item, current) => item.id > current.id ? item.id + 1 : current.id + 1, 1);
+      formData.id = maxId;
+    }
+
+    const newData = [...data, formData];
+
+    saveData(newData);
+  }
+
   const showTaskList = (taskListId) => {
     const list = data?.find((item) => item.id==taskListId);
 
@@ -158,6 +171,7 @@ function TaskProvider({ children }) {
 				showTaskList,
         taskList,
         setTaskList,
+        createTaskList,
 			}}>
 			{children}
 		</TaskContext.Provider>
