@@ -1,56 +1,39 @@
 import { useContext, useState } from 'react';
 import { TaskContext } from '../TaskContext';
 
-function CreateTaskListForm( { setOpenTaskListModal }) {
+function CreateTaskForm( { setOpenTaskModal }) {
   const context = useContext(TaskContext);
 
   const [formData, setFormData] = useState({
-      name: "",
       description: "",
-      limit_date: "",
-  });
+      isDone: false
+  }); 
 
   const onSubmit = (event) => {
       event.preventDefault();
-      context.createTaskList(formData);
-      setOpenTaskListModal(false);
+      context.createTask(formData);
+      setOpenTaskModal(false);
   };
 
   const onCancel = (event) => {
-      setOpenTaskListModal(false);
+      setOpenTaskModal(false);
   };
 
   const handleChange = (event) => {
-	setFormData({
-	  ...formData,
-	  [event.target.name]: event.target.value,
-	});
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center justify-center z-20 bg-white p-10 w-auto rounded-lg">
-      <label className="mb-5 font-medium font-bold">Create a new task list</label>
-      <input 
-        id="name"
-        name="name"
-      	type="text"
-        placeholder="Name"
-        className="rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none"
-        onChange={handleChange}
-      />
+      <label className="mb-5 font-medium font-bold">Create a new task</label>
        <input 
         id="description"
         name="description"
        	type="text"
         placeholder="Description"
-        className="rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none"
-        onChange={handleChange}
-      />
-        <input 
-        id="limit_date"
-        name="limit_date"
-        tyoe="date"
-        placeholder="Deadline"
         className="rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none"
         onChange={handleChange}
       />
@@ -72,4 +55,4 @@ function CreateTaskListForm( { setOpenTaskListModal }) {
   );
 }
 
-export { CreateTaskListForm };
+export { CreateTaskForm };

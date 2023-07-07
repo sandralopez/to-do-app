@@ -6,26 +6,33 @@ import { Container } from '../Container';
 import { CreateTaskListButton } from '../CreateTaskListButton';
 import { CreateTaskButton } from '../CreateTaskButton';
 import { CreateTaskListForm } from '../CreateTaskListForm';
+import { CreateTaskForm } from '../CreateTaskForm';
 import { Modal } from '../Modal';
 
 function App() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openTaskListModal, setOpenTaskListModal] = useState(false);
+  const [openTaskModal, setOpenTaskModal] = useState(false);
 
   return (
     <>
       <TaskProvider>
         <Container>
           <TaskLists>
-            <CreateTaskListButton setOpenModal={setOpenModal} />
+            <CreateTaskListButton setOpenTaskListModal={setOpenTaskListModal} />
           </TaskLists>
           <TaskList>
             <span className="text-lg font-semibold text-center mb-20">Tasks</span>
-            <CreateTaskButton />
+            <CreateTaskButton setOpenTaskModal={setOpenTaskModal} />
           </TaskList>
         </Container>
-        {openModal && (
+        {openTaskListModal && (
           <Modal>
-           <CreateTaskListForm setOpenModal={setOpenModal} />
+           <CreateTaskListForm setOpenTaskListModal={setOpenTaskListModal} />
+          </Modal>
+        )}
+        {openTaskModal && (
+          <Modal>
+           <CreateTaskForm setOpenTaskModal={setOpenTaskModal} />
           </Modal>
         )}
       </TaskProvider>

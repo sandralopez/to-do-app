@@ -81,13 +81,13 @@ function TaskProvider({ children }) {
 
   const [taskList, setTaskList] = useState({});
 
+  const [task, setTask] = useState({});
+
   const createTaskList = (formData) => {
-    if (data.length == 0)
-      formData.id = 1;
-    else {
-      const maxId = data.reduce((item, current) => item.id > current.id ? item.id + 1 : current.id + 1, 1);
-      formData.id = maxId;
-    }
+    const maxId = data.reduce((item, current) => item.id > current.id ? item.id + 1 : current.id + 1, 1);
+    formData.id = maxId;
+    
+    formData.tasks = [];
 
     const newData = [...data, formData];
 
@@ -143,6 +143,31 @@ function TaskProvider({ children }) {
     saveData(newData);
   }
 
+  const createTask = (formData) => {
+    const newTaskList = {...taskList};
+    const newData = [...data];
+
+    const maxId = taskList.tasks.reduce((item, current) => item.id > current.id ? item.id + 1 : current.id + 1, 1);
+    formData.id = maxId; 
+
+    newTaskList.tasks = [...newTaskList.tasks, formData];
+
+    const taskListIndex = newData.findIndex(
+      (list) => list.id === taskList.id
+    )
+
+    newData[taskListIndex] = newTaskList;
+
+    setTaskList(newTaskList);
+    setTask(formData);
+    saveData(newData);
+    }
+/*
+    const newData = {...taskList, formData};
+console.log(newData);
+    saveData(newData);
+  }*/
+
   /*
   const createTask = (task) => {
     console.log('createTask');
@@ -172,6 +197,9 @@ function TaskProvider({ children }) {
         taskList,
         setTaskList,
         createTaskList,
+        task,
+        setTask,
+        createTask,
 			}}>
 			{children}
 		</TaskContext.Provider>
