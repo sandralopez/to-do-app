@@ -20,7 +20,7 @@ function App() {
           <TaskLists>
             <CreateTaskListButton setOpenTaskListModal={setOpenTaskListModal} />
           </TaskLists>
-          <TaskList>
+          <TaskList setOpenTaskModal={setOpenTaskModal}>
             <span className="text-lg font-semibold text-center mb-20">Tasks</span>
             <CreateTaskButton setOpenTaskModal={setOpenTaskModal} />
           </TaskList>
